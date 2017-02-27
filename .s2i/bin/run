@@ -7,4 +7,6 @@
 #	https://github.com/openshift/source-to-image/blob/master/docs/builder_image.md
 #
 
-exec <start your server here>
+pwd
+ls -la
+java -jar -Dspring.profiles.active=dev /opt/app-root/src/build/libs/s2i-0.0.1-SNAPSHOT.jar

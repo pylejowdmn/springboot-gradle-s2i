@@ -32,3 +32,5 @@ pwd
 ls -la
 
 ls -la ./build
+
+cp ./build/libs/
