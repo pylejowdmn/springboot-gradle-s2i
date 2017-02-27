@@ -27,10 +27,4 @@ echo "---> Building application from source..."
 # TODO: Add build steps for your application, eg npm install, bundle install
 sh gradlew clean build assemble
 
-pwd
-
-ls -la
-
-ls -la ./build
-
-cp ./build/libs/
+ls -la ${HOME}
