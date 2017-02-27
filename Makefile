@@ -1,5 +1,5 @@
 
-IMAGE_NAME = registry.access.redhat.com/redhat-openjdk-18/openjdk18-openshift
+IMAGE_NAME = docker-registry-default.apps.ocppoc.woodmen.net/esp-test/s2i
 
 build:
 	docker build -t $(IMAGE_NAME) .
