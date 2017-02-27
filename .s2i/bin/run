@@ -1,0 +1,11 @@
+#!/bin/bash -e
+#
+# S2I run script for the 'registry.access.redhat.com/redhat-openjdk-18/openjdk18-openshift' image.
+# The run script executes the server that runs your application.
+#
+# For more information see the documentation:
+#	https://github.com/openshift/source-to-image/blob/master/docs/builder_image.md
+#
+
+# TODO Use an environment variable for profile !!!
+java -jar -Dspring.profiles.active=dev build/libs/s2i-0.0.1-SNAPSHOT.jar
