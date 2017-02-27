@@ -31,3 +31,7 @@ echo "---> Shoe me the money..."
 pwd
 
 ls -la
+
+echo "---> Shoe me the root..."
+
+ls /
