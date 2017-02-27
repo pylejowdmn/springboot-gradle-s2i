@@ -27,3 +27,7 @@ echo "---> Building application from source..."
 # TODO: Add build steps for your application, eg npm install, bundle install
 
 echo "---> Shoe me the money..."
+
+pwd
+
+ls -la
