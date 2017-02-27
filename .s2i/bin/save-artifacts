@@ -1,6 +1,6 @@
 #!/bin/sh -e
 #
-# S2I save-artifacts script for the 'registry.access.redhat.com/redhat-openjdk-18/openjdk18-openshift' image.
+# S2I save-artifacts script for the 'esp-test/s2i' image.
 # The save-artifacts script streams a tar archive to standard output.
 # The archive contains the files and folders you want to re-use in the next build.
 #
@@ -8,16 +8,3 @@
 #	https://github.com/openshift/source-to-image/blob/master/docs/builder_image.md
 #
 # tar cf - <list of files and folders>
-
-
-
-#!/bin/bash
-
-# Besides the tar command, all other output to standard out must
-# be surpressed.  Otherwise, the tar stream will be corrupted.
-pushd ${HOME} >/dev/null
-if [ -d deps ]; then
-    # all deps contents to tar stream
-    tar cf - ${HOME}/.gradle
-fi
-popd >/dev/null

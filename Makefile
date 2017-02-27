@@ -1,5 +1,5 @@
 
-IMAGE_NAME = docker-registry-default.apps.ocppoc.woodmen.net/esp-test/s2i
+IMAGE_NAME = esp-test/s2i
 
 build:
 	docker build -t $(IMAGE_NAME) .
