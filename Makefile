@@ -1,5 +1,5 @@
 
-IMAGE_NAME = esp-test/s2i
+IMAGE_NAME = wli-gradle-s2i
 
 build:
 	docker build -t $(IMAGE_NAME) .
