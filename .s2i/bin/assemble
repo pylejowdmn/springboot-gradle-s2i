@@ -24,7 +24,7 @@ echo "---> Installing application source..."
 cp -Rf /tmp/src/. ./
 
 echo "---> Building application from source..."
-# TODO: Add build steps for your application, eg npm install, bundle install
+# Add build steps for your application, eg npm install, bundle install
 sh gradlew clean build assemble
 
-ls -la ${HOME}
+fix-permissions ./

@@ -1,36 +1,35 @@
+FROM registry.access.redhat.com/rhel7.3
 
-# esp-test/s2i
-FROM openshift/base-centos7
-
-# TODO: Put the maintainer name in the image metadata
 MAINTAINER Joshua T. Pyle <Jpyle@woodmen.org>
 
-# TODO: Rename the builder environment variable to inform users about application you provide them
-ENV BUILDER_VERSION 0.9
+ENV SERVER_PORT 8080
+ENV MANAGEMENT_PORT 8081
+ENV JAVA_VERSON 1.8.0
+ENV GRADLE_VERSION 3.4
 
-# TODO: Set labels used in OpenShift to describe the builder image
-LABEL io.k8s.description="Platform for building WLI Gradle Spring Boot applications" \
-      io.k8s.display-name="builder 0.9.0" \
-      io.openshift.expose-services="8080:http" \
-      io.openshift.tags="builder,0.9.0"
+EXPOSE $SERVER_PORT
+EXPOSE $MANAGEMENT_PORT
 
-# TODO: Install required packages here
-RUN yum install -y java-1.8.0-openjdk-devel.x86_64 && yum clean all -y
+LABEL io.k8s.description="Platform for building and running Spring Boot applications" \
+      io.k8s.display-name="Spring Boot Gradle 3" \
+      io.openshift.expose-services="8080:server,8081:actuator" \
+      io.openshift.tags="builder,java,java8,gradle,gradle3,springboot"
 
-# TODO (optional): Copy the builder files into /opt/app-root
-# COPY ./<builder_folder>/ /opt/app-root/
+RUN yum update -y && \
+  yum install -y curl && \
+  yum install -y unzip && \
+  yum install -y java-$JAVA_VERSON-openjdk java-$JAVA_VERSON-openjdk-devel && \
+  yum clean all
 
-# TODO: Copy the S2I scripts to /usr/libexec/s2i, since openshift/base-centos7 image sets io.openshift.s2i.scripts-url label that way, or update that label
-COPY ./.s2i/bin/ /usr/libexec/s2i
+RUN curl -fsSL https://services.gradle.org/distributions/gradle-$GRADLE_VERSION-bin.zip | unzip -v - -d /usr/share \
+  && mv /usr/share/gradle-$GRADLE_VERSION /usr/share/gradle \
+  && ln -s /usr/share/gradle/bin/gradle /usr/bin/gradle
 
-# TODO: Drop the root user and make the content of /opt/app-root owned by user 1001
-RUN chown -R 1001:1001 /opt/app-root
+# Add configuration files, bashrc and other tweaks
+COPY ./.s2i/bin/ $STI_SCRIPTS_PATH
 
-# This default user is created in the openshift/base-centos7 image
+RUN chown -R 1001:0 /opt/app-root
 USER 1001
 
-# TODO: Set the default port for applications built using this image
-EXPOSE 8080
-
-# TODO: Set the default CMD for the image
-CMD ["usage"]
+# Set the default CMD to print the usage of the language image
+CMD $STI_SCRIPTS_PATH/usage
