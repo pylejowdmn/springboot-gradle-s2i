@@ -30,6 +30,7 @@ RUN wget https://services.gradle.org/distributions/gradle-$GRADLE_VERSION-bin.zi
 # wget http://www.vim.org/scripts/download_script.php?src_id=11834 -O temp.zip; unzip temp.zip; rm temp.zip
 
 # Add configuration files, bashrc and other tweaks
+# TODO test using $S2I_SCRIPTS_PATH instead of /usr/libexec/s2i
 COPY ./.s2i/bin/ /usr/libexec/s2i
 
 ENV JAVA_HOME /usr/lib/jvm/java
@@ -42,4 +43,5 @@ RUN mkdir -p /opt/app-root && \
 USER 1001
 
 # Set the default CMD to print the usage of the language image
+# TODO test using $S2I_SCRIPTS_PATH instead of $STI_SCRIPTS_PATH
 CMD $STI_SCRIPTS_PATH/usage
