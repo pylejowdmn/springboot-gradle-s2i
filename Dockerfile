@@ -41,7 +41,8 @@ RUN mkdir -p /opt/app-root && \
     chown -R 1001:1001 /opt/app-root && \
     chown -R 1001:1001 /usr/libexec/s2i && \
     chmod +x /usr/libexec/s2i/* && \
-    chmod +w /
+    chgrp 1001 / && \
+    chmod g+w /
 
 USER 1001
 
