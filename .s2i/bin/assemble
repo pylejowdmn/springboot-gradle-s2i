@@ -22,7 +22,7 @@ echo $HOME
 if [ "$(ls /tmp/s2i/artifacts/ 2>/dev/null)" ]
 then
     echo "Restoring saved artifacts from prior build..."
-    mv /tmp/s2i/artifacts/* $HOME/.
+    mv /tmp/s2i/artifacts/* /tmp/src
 else
     echo "No saved artifacts to restore..."
 fi
@@ -35,4 +35,4 @@ sh $GRADLE_HOME/bin/gradle clean build
 #echo "---> Fixing folder permissions..."
 #fix-permissions ./
 #fix-permissions /opt/app-root
-ls -la ${HOME}
+ls -la /tmp/src
