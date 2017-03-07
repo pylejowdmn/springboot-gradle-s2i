@@ -4,27 +4,30 @@
 # The 'assemble' script builds your application source so that it is ready to run.
 #
 # For more information refer to the documentation:
-#	https://github.com/openshift/source-to-image/blob/master/docs/builder_image.md
+#   https://github.com/openshift/source-to-image/blob/master/docs/builder_image.md
 #
 
 if [[ "$1" == "-h" ]]; then
-	# If the 'esp-test/s2i' assemble script is executed with '-h' flag,
-	# print the usage.
-	exec /usr/libexec/s2i/usage
-fi
-
-# Restore artifacts from the previous build (if they exist).
-#
-if [ "$(ls /tmp/artifacts/ 2>/dev/null)" ]; then
-  echo "---> Restoring build artifacts..."
-  mv /tmp/artifacts/. ./
+    # If the 'esp-test/s2i' assemble script is executed with '-h' flag,
+    # print the usage.
+    exec /usr/libexec/s2i/usage
 fi
 
 echo "---> Installing application source..."
 cp -Rf /tmp/src/. ./
 
-echo "---> Building application from source..."
-# Add build steps for your application, eg npm install, bundle install
-sh gradlew clean build assemble
+# Restore artifacts from the previous build (if they exist).
+if [ "$(ls /tmp/s2i/artifacts/ 2>/dev/null)" ]
+then
+    echo "Restoring saved artifacts from prior build..."
+    mv /tmp/s2i/artifacts/* $HOME/.
+else
+    echo "No saved artifacts to restore..."
+fi
 
-fix-permissions ./
+echo "---> Building application from source..."
+# build steps
+sh $GRADLE_HOME/bin/gradle clean build
+#echo "---> Fixing folder permissions..."
+#fix-permissions ./
+#fix-permissions /opt/app-root

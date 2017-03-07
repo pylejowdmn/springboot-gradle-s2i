@@ -1,5 +1,5 @@
 
-IMAGE_NAME = wli-gradle-s2i
+IMAGE_NAME = springboot-gradle-s2i
 
 build:
 	docker build -t $(IMAGE_NAME) .
