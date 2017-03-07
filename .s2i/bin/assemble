@@ -13,6 +13,8 @@ if [[ "$1" == "-h" ]]; then
     exec /usr/libexec/s2i/usage
 fi
 
+pwd
+
 echo "---> Installing application source..."
 cp -Rf /tmp/src/. ./
 
