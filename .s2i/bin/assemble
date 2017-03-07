@@ -15,8 +15,8 @@ fi
 
 echo $HOME
 
-echo "---> Installing application source..."
-cp -Rf /tmp/src/. ./
+#echo "---> Installing application source..."
+#cp -Rf /tmp/src/. $HOME/.
 
 # Restore artifacts from the previous build (if they exist).
 if [ "$(ls /tmp/s2i/artifacts/ 2>/dev/null)" ]
@@ -28,6 +28,8 @@ else
 fi
 
 echo "---> Building application from source..."
+pwd
+cd /tmp/src
 # build steps
 sh $GRADLE_HOME/bin/gradle clean build
 #echo "---> Fixing folder permissions..."
