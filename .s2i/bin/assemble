@@ -35,3 +35,4 @@ sh $GRADLE_HOME/bin/gradle clean build
 #echo "---> Fixing folder permissions..."
 #fix-permissions ./
 #fix-permissions /opt/app-root
+ls -la ${HOME}
