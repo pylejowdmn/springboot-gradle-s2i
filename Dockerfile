@@ -39,7 +39,8 @@ ENV GRADLE_USER_HOME /opt/app-root
 
 RUN mkdir -p /opt/app-root && \
     chown -R 1001:1001 /opt/app-root && \
-    chown -R 1001:1001 /usr/libexec/s2i
+    chown -R 1001:1001 /usr/libexec/s2i && \
+    chmod +x /usr/libexec/s2i/*
 
 USER 1001
 
