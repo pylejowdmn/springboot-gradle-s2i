@@ -26,7 +26,8 @@ then
 else
     echo "No saved artifacts to restore..."
 fi
-cat /tmp/src/save_msg.txt
+
+ls -la /tmp/s2i/artifacts/
 
 echo "---> Building application from source..."
 pwd
