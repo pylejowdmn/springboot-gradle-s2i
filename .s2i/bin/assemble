@@ -26,6 +26,7 @@ then
 else
     echo "No saved artifacts to restore..."
 fi
+cat /tmp/src/save_msg.txt
 
 echo "---> Building application from source..."
 pwd
@@ -36,3 +37,4 @@ sh $GRADLE_HOME/bin/gradle clean build
 #fix-permissions ./
 #fix-permissions /opt/app-root
 ls -la /tmp/src
+ls -la $HOME
