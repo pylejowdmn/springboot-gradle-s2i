@@ -9,8 +9,5 @@
 #
 # tar cf - <list of files and folders>
 pushd ${HOME} >/dev/null
-if [ -d deps ]; then
-    # all deps contents to tar stream
-    tar cf - .gradle
-fi
+tar cf - .gradle/
 popd >/dev/null
