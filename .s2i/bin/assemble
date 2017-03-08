@@ -19,10 +19,10 @@ echo $HOME
 #cp -Rf /tmp/src/. $HOME/.
 
 # Restore artifacts from the previous build (if they exist).
-if [ "$(ls /tmp/s2i/artifacts/ 2>/dev/null)" ]
+if [ "$(ls /tmp/artifacts/ 2>/dev/null)" ]
 then
     echo "Restoring saved artifacts from prior build..."
-    mv /tmp/s2i/artifacts/* ${HOME}/.
+    mv /tmp/artifacts/* ${HOME}/.
 else
     echo "No saved artifacts to restore..."
 fi
