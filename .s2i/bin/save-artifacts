@@ -8,4 +8,9 @@
 #   https://github.com/openshift/source-to-image/blob/master/docs/builder_image.md
 #
 # tar cf - <list of files and folders>
-tar cf - ${HOME}/.gradle
+pushd ${HOME} >/dev/null
+if [ -d deps ]; then
+    # all deps contents to tar stream
+    tar cf - .gradle
+fi
+popd >/dev/null
