@@ -27,7 +27,7 @@ else
     echo "No saved artifacts to restore..."
 fi
 
-ls -la /tmp/s2i/artifacts/
+ls -la /tmp/s2i/
 
 echo "---> Building application from source..."
 pwd
