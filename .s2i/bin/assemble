@@ -19,13 +19,13 @@ echo $HOME
 #cp -Rf /tmp/src/. $HOME/.
 
 # Restore artifacts from the previous build (if they exist).
-if [ "$(ls /tmp/artifacts/ 2>/dev/null)" ]
-then
-    echo "Restoring saved artifacts from prior build..."
-    mv /tmp/artifacts/* ${HOME}/.
-else
-    echo "No saved artifacts to restore..."
-fi
+#if [ "$(ls /tmp/artifacts/ 2>/dev/null)" ]
+#then
+echo "Restoring saved artifacts from prior build..."
+mv -f /tmp/artifacts/.gradle ${HOME}/
+#else
+#    echo "No saved artifacts to restore..."
+#fi
 
 echo "---> Building application from source..."
 cd /tmp/src
