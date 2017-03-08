@@ -8,4 +8,5 @@
 #   https://github.com/openshift/source-to-image/blob/master/docs/builder_image.md
 #
 # tar cf - <list of files and folders>
+echo "saving artifacts from /tmp/src/.gradle" > /tmp/src/save_msg.txt
 tar cf - /tmp/src/.gradle
