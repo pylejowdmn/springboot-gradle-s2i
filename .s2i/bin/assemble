@@ -1,6 +1,6 @@
 #!/bin/bash -e
 #
-# S2I assemble script for the 'esp-test/s2i' image.
+# S2I assemble script for the 'springboot-gradle-s2i' image.
 # The 'assemble' script builds your application source so that it is ready to run.
 #
 # For more information refer to the documentation:
@@ -13,33 +13,9 @@ if [[ "$1" == "-h" ]]; then
     exec /usr/libexec/s2i/usage
 fi
 
-echo $HOME
-
-#echo "---> Installing application source..."
-#cp -Rf /tmp/src/. $HOME/.
-
-# Restore artifacts from the previous build (if they exist).
-#if [ "$(ls /tmp/artifacts/ 2>/dev/null)" ]
-#then
 echo "Restoring saved artifacts from prior build..."
 mv -f /tmp/artifacts/.gradle ${HOME}/
-#else
-#    echo "No saved artifacts to restore..."
-#fi
 
 echo "---> Building application from source..."
 cd /tmp/src
 sh $GRADLE_HOME/bin/gradle clean build
-
-#echo "---> Fixing folder permissions..."
-#fix-permissions ./
-#fix-permissions /opt/app-root
-
-echo "Showing /tmp"
-ls -la /tmp
-echo "Showing /tmp/artifacts"
-ls -la /tmp/artifacts
-echo "Showing /tmp/src"
-ls -la /tmp/src
-echo "Home directory"
-ls -la $HOME

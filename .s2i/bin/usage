@@ -1,6 +1,6 @@
 #!/bin/bash -e
 cat <<EOF
-This is the esp-test/s2i S2I image:
+This is the springboot-gradle-s2i S2I image:
 To use it, install S2I: https://github.com/openshift/source-to-image
 
 Sample invocation:
