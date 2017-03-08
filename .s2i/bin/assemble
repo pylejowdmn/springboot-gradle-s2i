@@ -35,6 +35,11 @@ sh $GRADLE_HOME/bin/gradle clean build
 #fix-permissions ./
 #fix-permissions /opt/app-root
 
+echo "Showing /tmp"
 ls -la /tmp
+echo "Showing /tmp/artifacts"
+ls -la /tmp/artifacts
+echo "Showing /tmp/src"
 ls -la /tmp/src
+echo "Home directory"
 ls -la $HOME

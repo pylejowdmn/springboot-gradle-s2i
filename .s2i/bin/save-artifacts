@@ -9,5 +9,5 @@
 #
 # tar cf - <list of files and folders>
 pushd ${HOME} >/dev/null
-tar cf - .gradle/
+tar cf - .gradle/.
 popd >/dev/null
