@@ -33,15 +33,15 @@ RUN wget https://services.gradle.org/distributions/gradle-$GRADLE_VERSION-bin.zi
 # TODO test using $S2I_SCRIPTS_PATH instead of /usr/libexec/s2i
 COPY ./.s2i/bin/ /usr/libexec/s2i
 
-ENV JAVA_HOME /usr/lib/jvm/java
-ENV GRADLE_HOME /usr/share/gradle
-ENV GRADLE_USER_HOME /opt/app-root
-
 RUN mkdir -p /opt/app-root && \
     chown -R 1001:1001 /opt/app-root && \
     chown -R 1001:1001 /usr/libexec/s2i && \
     chmod +x /usr/libexec/s2i/* && \
     useradd -u 1001 dockuser
+
+ENV JAVA_HOME /usr/lib/jvm/java
+ENV GRADLE_HOME /usr/share/gradle
+ENV GRADLE_USER_HOME /opt/app-root/.gradle
 
 USER 1001
 
