@@ -41,7 +41,6 @@ RUN mkdir -p /opt/app-root && \
 
 ENV JAVA_HOME /usr/lib/jvm/java
 ENV GRADLE_HOME /usr/share/gradle
-ENV GRADLE_USER_HOME /opt/app-root/.gradle
 
 USER 1001
 

@@ -22,7 +22,7 @@ echo $HOME
 if [ "$(ls /tmp/s2i/artifacts/ 2>/dev/null)" ]
 then
     echo "Restoring saved artifacts from prior build..."
-    mv /tmp/s2i/artifacts/* /tmp/src
+    mv /tmp/s2i/artifacts/* ${HOME}/.gradle/
 else
     echo "No saved artifacts to restore..."
 fi
