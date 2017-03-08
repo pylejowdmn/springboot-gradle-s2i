@@ -27,9 +27,7 @@ RUN wget https://services.gradle.org/distributions/gradle-$GRADLE_VERSION-bin.zi
   && rm gradle.zip \
   && mv /usr/share/gradle-$GRADLE_VERSION /usr/share/gradle \
   && ln -s /usr/share/gradle/bin/gradle /usr/bin/gradle
-# wget http://www.vim.org/scripts/download_script.php?src_id=11834 -O temp.zip; unzip temp.zip; rm temp.zip
 
-# Add configuration files, bashrc and other tweaks
 # TODO test using $S2I_SCRIPTS_PATH instead of /usr/libexec/s2i
 COPY ./.s2i/bin/ /usr/libexec/s2i
 
