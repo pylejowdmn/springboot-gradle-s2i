@@ -5,7 +5,7 @@ To use it, install S2I: https://github.com/openshift/source-to-image
 
 Sample invocation:
 
-s2i build <source code path/URL> esp-test/s2i <application image>
+s2i build <source code path/URL> springboot-gradle-s2i <application image>
 
 You can then run the resulting image via:
 docker run <application image>

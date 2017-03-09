@@ -8,7 +8,7 @@
 #
 
 if [[ "$1" == "-h" ]]; then
-    # If the 'esp-test/s2i' assemble script is executed with '-h' flag,
+    # If the 'springboot-gradle-s2i' assemble script is executed with '-h' flag,
     # print the usage.
     exec /usr/libexec/s2i/usage
 fi
