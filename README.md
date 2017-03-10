@@ -18,3 +18,12 @@ ENV SERVER_PORT 8080
 &#35; Used to set the management port that things like actuator will be accessible through.
 
 ENV MANAGEMENT_PORT 8081
+
+
+
+
+
+Copyright
+--------------------
+
+Released under the Apache License 2.0. See the [LICENSE](LICENSE) file.
