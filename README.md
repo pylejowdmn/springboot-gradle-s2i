@@ -1,7 +1,7 @@
 Spring Boot with Gradle build - CentOS/RHEL Docker image
 ========================================================
 
-This repository contains the s2i source for building a Spring Boot () application with Gradle (https://gradle.org/) and then executing the resulting "fat" jar.  It sets a few environment variables that typical spring boot applications will make use of. 
+This repository contains the s2i source for building a [Spring Boot](https://projects.spring.io/spring-boot/) application with [Gradle](https://gradle.org/) and then executing the resulting "fat" jar.  It sets a few environment variables that typical spring boot applications will make use of. 
 
 The centos image is available on DockerHub
 ```
