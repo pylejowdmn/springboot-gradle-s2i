@@ -13,8 +13,13 @@ if [[ "$1" == "-h" ]]; then
     exec /usr/libexec/s2i/usage
 fi
 
-echo "Restoring saved artifacts from prior build..."
-mv -f /tmp/artifacts/.gradle ${HOME}/
+if [ -d "/tmp/artifacts/.gradle" ]; then
+  echo "Restoring saved artifacts from prior build..."
+  mv -f /tmp/artifacts/.gradle ${HOME}/
+else
+  echo "No saved artifacts from previous build"
+fi
+
 
 echo "---> Building application from source..."
 cd /tmp/src
