@@ -19,9 +19,12 @@ ENV SERVER_PORT 8080
 
 ENV MANAGEMENT_PORT 8081
 
-
-
-
+Pushing to Docker Hub
+-------------------------------
+```
+$ docker build -t woodmenlife/springboot-gradle-s2i .
+$ docker push woodmenlife/springboot-gradle-s2i
+```
 
 Copyright
 --------------------

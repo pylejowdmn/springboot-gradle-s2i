@@ -20,8 +20,15 @@ else
   echo "No saved artifacts from previous build"
 fi
 
+#If GRADLE_ARGS is unset or blank, set to "clean build -x test"
+if [ -z "$GRADLE_ARGS" ]; then
+  GRADLE_ARGS="clean build -x test"
+  echo "---> \$GRADLE_ARGS not set, defaulting to [${GRADLE_ARGS}]"
+else
+  echo "---> \$GRADLE_ARGS set with value: [${GRADLE_ARGS}]"
+fi
 
 echo "---> Building application from source..."
 cd /tmp/src
-sh $GRADLE_HOME/bin/gradle clean build
+sh $GRADLE_HOME/bin/gradle $GRADLE_ARGS
 
