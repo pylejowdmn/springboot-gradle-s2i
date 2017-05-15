@@ -26,6 +26,12 @@ $ docker build -t woodmenlife/springboot-gradle-s2i .
 $ docker push woodmenlife/springboot-gradle-s2i
 ```
 
+Updating OpenShift image to Docker Hub latest
+-------------------------------
+```
+oc import-image woodmenlife/springboot-gradle-s2i
+```
+
 Copyright
 --------------------
 
