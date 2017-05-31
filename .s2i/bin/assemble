@@ -6,7 +6,6 @@
 # For more information refer to the documentation:
 #   https://github.com/openshift/source-to-image/blob/master/docs/builder_image.md
 #
-
 if [[ "$1" == "-h" ]]; then
     # If the 'springboot-gradle-s2i' assemble script is executed with '-h' flag,
     # print the usage.
@@ -22,7 +21,7 @@ fi
 
 #If GRADLE_ARGS is unset or blank, default to "clean build -x test"
 if [ -z "$GRADLE_ARGS" ]; then
-  GRADLE_ARGS="clean build -x test"
+  GRADLE_ARGS="--no-daemon clean build -x test"
   echo "---> \$GRADLE_ARGS not set, defaulting to [${GRADLE_ARGS}]"
 else
   echo "---> \$GRADLE_ARGS set with value: [${GRADLE_ARGS}]"
