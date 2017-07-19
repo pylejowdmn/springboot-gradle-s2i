@@ -7,6 +7,8 @@
 #   https://github.com/openshift/source-to-image/blob/master/docs/builder_image.md
 #
 
+cd /tmp
+
 #If APP_TARGET is unset or blank, default to the JAR name found (-printf grabs just jar name)
 if [ -z "$APP_TARGET" ]; then
   APP_TARGET=`find /tmp/src/build/libs -name *.jar -printf "%f\n"`
