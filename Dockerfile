@@ -1,39 +1,33 @@
-FROM centos:7
+FROM redhat-openjdk-18/openjdk18-openshift
 
-MAINTAINER Joshua T. Pyle <Jpyle@woodmen.org>
+MAINTAINER Joshua T. Pyle <JPyle@woodmen.org>
 
 ENV SERVER_PORT=8080 \
-    MANAGEMENT_PORT=8081
+    MANAGEMENT_PORT=8081 \
+    PATH="$PATH:"/usr/local/s2i"" \
+    JAVA_DATA_DIR="/deployments/data" \
+    GRADLE_HOME=/usr/share/gradle \
+    JAVA_TOOL_OPTIONS=''
 
-EXPOSE $SERVER_PORT
-EXPOSE $MANAGEMENT_PORT
+EXPOSE $SERVER_PORT $MANAGEMENT_PORT
 
-LABEL io.k8s.description="Platform for building and running Spring Boot applications" \
+LABEL name="woodmenlife/springboot-gradle-s2i" \
+      version="1.0" \
+      release="10" \
+      architecture="x86_64" \
+      io.openshift.expose-services="8080:server,8081:managment" \
+      io.openshift.s2i.scripts-url="image:///usr/local/s2i" \
+      io.k8s.description="Platform for building and running Spring Boot applications" \
       io.k8s.display-name="Spring Boot Gradle 3" \
-      io.openshift.expose-services="8080:server,8081:actuator" \
       io.openshift.tags="builder,java,java8,gradle,gradle3,springboot" \
-      io.openshift.s2i.scripts-url=image:///usr/libexec/s2i
+      io.openshift.s2i.destination="/tmp"
 
-RUN yum update -y && \
-  yum install -y wget && \
-  yum install -y bash && \
-  yum install -y unzip
+# instead of using wget to download the garadle zip perhaps
+# use ADD to add from a local file.  Then USER 0 would no
+# longer be neccessary.
+USER root
 
-# Java Install
-ENV JAVA_VERSION_MAJOR=8 \
-    JAVA_VERSION_MINOR=131 \
-    JAVA_VERSION_BUILD=11 \
-    JAVA_URL_HASH=d54c1d3a095b4ff2b6607d096fa80163
-
-RUN wget --no-cookies --no-check-certificate \
-         --header "Cookie: gpw_e24=http%3A%2F%2Fwww.oracle.com%2F; oraclelicense=accept-securebackup-cookie" \
-         "http://download.oracle.com/otn-pub/java/jdk/${JAVA_VERSION_MAJOR}u${JAVA_VERSION_MINOR}-b${JAVA_VERSION_BUILD}/${JAVA_URL_HASH}/jdk-${JAVA_VERSION_MAJOR}u${JAVA_VERSION_MINOR}-linux-x64.rpm" -O /tmp/jdk-8-linux-x64.rpm && \
-    yum localinstall -y /tmp/jdk-8-linux-x64.rpm && \
-    alternatives --install /usr/bin/java jar /usr/java/latest/bin/java 200000 && \
-    alternatives --install /usr/bin/javaws javaws /usr/java/latest/bin/javaws 200000 && \
-    alternatives --install /usr/bin/javac javac /usr/java/latest/bin/javac 200000 && \
-    rm -f /tmp/jdk-8-linux-x64.rpm && \
-    yum clean all
+RUN yum install -y wget
 
 # Gradle Install
 ENV GRADLE_VERSION 3.4
@@ -43,20 +37,9 @@ RUN wget https://services.gradle.org/distributions/gradle-$GRADLE_VERSION-bin.zi
   && mv /usr/share/gradle-$GRADLE_VERSION /usr/share/gradle \
   && ln -s /usr/share/gradle/bin/gradle /usr/bin/gradle
 
-# TODO test using $S2I_SCRIPTS_PATH instead of /usr/libexec/s2i
-COPY ./.s2i/bin/ /usr/libexec/s2i
+COPY ./.s2i/bin/ /usr/local/s2i
 
-RUN mkdir -p /opt/app-root && \
-    chown -R 1001:1001 /opt/app-root && \
-    chown -R 1001:1001 /usr/libexec/s2i && \
-    chmod +x /usr/libexec/s2i/* && \
-    useradd -u 1001 dockuser
+RUN chmod +x /usr/local/s2i/*
 
-ENV JAVA_HOME=/usr/java/latest \
-    GRADLE_HOME=/usr/share/gradle
-
-USER 1001
-
-# Set the default CMD to print the usage of the language image
-# TODO test using $S2I_SCRIPTS_PATH instead of $STI_SCRIPTS_PATH
-CMD $STI_SCRIPTS_PATH/usage
+USER 185
+CMD ["/usr/local/s2i/run"]

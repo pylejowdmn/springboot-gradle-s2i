@@ -2,9 +2,9 @@
 IMAGE_NAME = springboot-gradle-s2i
 
 build:
-	docker build -t $(IMAGE_NAME) .
+	sudo docker build -t $(IMAGE_NAME) .
 
 .PHONY: test
 test:
-	docker build -t $(IMAGE_NAME)-candidate .
+	sudo docker build -t $(IMAGE_NAME)-candidate .
 	IMAGE_NAME=$(IMAGE_NAME)-candidate test/run
