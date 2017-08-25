@@ -1,7 +1,12 @@
-
+# do `make && make test`
+SRC = Dockerfile $(shell ls .s2i/bin/*)
 IMAGE_NAME = springboot-gradle-s2i
 
-build:
+.PHONY: all
+all: build
+
+.PHONY: build
+build: $(SRC)
 	sudo docker build -t $(IMAGE_NAME) .
 
 .PHONY: test
